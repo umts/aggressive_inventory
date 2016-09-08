@@ -1,4 +1,5 @@
 require 'spec_helper'
+include AggressiveInventory::Errors::InventoryExceptions
 
 # giant loganote: These specs were (origionally) writtent to be strongly
 # coupled to the API. Aside from the first spec, these require a local API to be
@@ -120,10 +121,10 @@ describe AggressiveInventory::Legacy::Client do
       expect(response).to include('start_time' => reservation_start.iso8601, 'end_time' => reservation_end.iso8601)
 
       # update reservation
-      # expect { response = Inventory.update_reservation(reservation_uuid, start_time: (Time.current + 1.day)) }.not_to raise_error
-      # expect(response).to be_a(Hash)
-      # expect(time = response.try(:[], 'start_time')).not_to be_nil
-      # expect(Time.zone.parse(time)).to be_within(1.day).of(Time.current + 1.day)
+      expect { response = client.update_reservation(reservation_uuid, start_time: (Time.current + 1.day)) }.not_to raise_error
+      expect(response).to be_a(Hash)
+      expect(time = response.try(:[], 'start_time')).not_to be_nil
+      expect(Time.parse(time)).to be_within(1.day).of(Time.current + 1.day)
 
       # update reservation start_date
       expect { response = client.update_reservation_start_time(reservation_uuid, (Time.current + 2.days)) }.not_to raise_error
@@ -145,7 +146,6 @@ describe AggressiveInventory::Legacy::Client do
       expect(response.try(:[], 'uuid')).to eq(item_uuid)
       expect(response.try(:[], 'data')).to include('color' => 'orange')
 
-=begin
       # delete reservation
       expect { response = client.delete_reservation(reservation_uuid) }.not_to raise_error
       expect(response).to be_nil
@@ -160,8 +160,6 @@ describe AggressiveInventory::Legacy::Client do
       expect { response = client.delete_item_type(item_type_uuid) }.not_to raise_error
       expect(response).to be_nil
       expect { client.item_type(item_type_uuid) }.to raise_error ItemTypeNotFound
-=end
     end
-
   end
 end
