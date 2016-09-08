@@ -1,5 +1,6 @@
 require 'aggressive_inventory/version'
 require 'aggressive_inventory/util/configuration'
+require 'aggressive_inventory/errors/inventory_exceptions'
 require 'aggressive_inventory/legacy/client'
 require 'aggressive_inventory/rest/client'
 require 'aggressive_inventory/rest/collection'

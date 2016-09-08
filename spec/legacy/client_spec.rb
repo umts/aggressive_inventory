@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 # giant loganote: These specs were (origionally) writtent to be strongly
 # coupled to the API. Aside from the first spec, these require a local API to be
 # running. Given limited resources (time), I am prioritizing geting this
@@ -28,7 +27,7 @@ describe AggressiveInventory::Legacy::Client do
         config.base_uri = 'http://localhost:4000/v1/'
         config.auth_token = '8c453f37442344bd8d8763e22720d925'
       end
-
+      
       client = AggressiveInventory::Legacy::Client.new
       expect(client.item_types.class).to be(Array)
       expect(client.item_types.empty?).to be(false)

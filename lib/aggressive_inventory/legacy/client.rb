@@ -9,6 +9,7 @@ module AggressiveInventory
   module Legacy
     class Client
       include AggressiveInventory::Util
+      include AggressiveInventory::Errors::InventoryExceptions    
 
       attr_reader :base_uri, :auth_token
 
