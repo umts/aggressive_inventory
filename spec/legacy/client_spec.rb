@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 include AggressiveInventory::Errors::InventoryExceptions
 
@@ -28,7 +29,7 @@ describe AggressiveInventory::Legacy::Client do
         config.base_uri = 'http://localhost:4000/v1/'
         config.auth_token = '8c453f37442344bd8d8763e22720d925'
       end
-      
+
       client = AggressiveInventory::Legacy::Client.new
       expect(client.item_types.class).to be(Array)
       expect(client.item_types.empty?).to be(false)
@@ -36,7 +37,6 @@ describe AggressiveInventory::Legacy::Client do
   end
 
   describe 'a bunch of legacy specs' do
-
     let(:name) do
       name = ''
       name += (rand(26) + 65).chr until name.length > 120

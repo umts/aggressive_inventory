@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-module AggressiveInventory  
+module AggressiveInventory
   module Errors
     module InventoryExceptions
       class AuthError < StandardError; end # 401 unauth
