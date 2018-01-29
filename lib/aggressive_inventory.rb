@@ -1,5 +1,7 @@
+# frozen_string_literal: true
 require 'aggressive_inventory/version'
 require 'aggressive_inventory/util/configuration'
+require 'aggressive_inventory/errors/inventory_exceptions'
 require 'aggressive_inventory/legacy/client'
 require 'aggressive_inventory/rest/client'
 require 'aggressive_inventory/rest/collection'
@@ -10,7 +12,7 @@ module AggressiveInventory
 
   def_delegators :configuration, :base_uri, :auth_token
 
-  def self.configure(&block)
+  def self.configure
     yield configuration
   end
 

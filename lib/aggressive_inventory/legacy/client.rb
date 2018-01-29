@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'httparty'
 # oh what a mess
 require 'active_support/core_ext/hash/indifferent_access'
@@ -9,10 +10,11 @@ module AggressiveInventory
   module Legacy
     class Client
       include AggressiveInventory::Util
+      include AggressiveInventory::Errors::InventoryExceptions
 
       attr_reader :base_uri, :auth_token
 
-      def initialize()
+      def initialize
         @base_uri = AggressiveInventory.base_uri
         @auth_token = AggressiveInventory.auth_token
         @get_headers = { 'Authorization' => "Token #{@auth_token}" }
@@ -159,7 +161,6 @@ module AggressiveInventory
         raise ReservationNotFound, response.body if response.code == 404
         raise InventoryError, response.body if response.code != 200
       end
-
     end
   end
 end
